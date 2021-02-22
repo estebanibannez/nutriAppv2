@@ -44,6 +44,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //empezar el servidor
 app.listen(app.get('port'), () => {
-    console.log(`Servidor en puerto ${app.get("port")}`);
-    console.log(`Trabajando en ambiente de : ${process.env.NODE_ENV}`);
+    console.log(`###################################`)
+    console.log(`#########   PORT  ${app.get("port")}  ###########`);
+    console.log(`#########   API REST    ###########`)
+    console.log(`#########   AMBIENTE    ###########`);
+    console.log(`#########   ${process.env.NODE_ENV} ###########`);
+    console.log(`###################################`)
 });
