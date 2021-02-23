@@ -2,21 +2,48 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
+//EXPORTANDO ROUTES
+const CategoriasRouter = require('./routes/categorias.route')
+
+
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 const express = require('express');
 const morgan = require('morgan');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-//inicialización
-const app = express();
-require('./database')
+//INCORPORACIÓN DE SWAGGER API
+//swagger extended: https://swagger.io/specification/#info0bject
+const options = {
+	definition: {
+		openapi: "3.0.0",
+		info: {
+			title: "Library API",
+			version: "1.0.0",
+			description: "A simple Express Library API",
+		},
+		servers: [
+			{
+				url: "http://localhost:3000",
+			},
+		],
+	},
+	apis: ["Backend/routes/*.js"],
+};
 
-//settings 
+const specs = swaggerJsDoc(options);
+
+//RUN SERVE INITIALIZATION
+const app = express();
+require('./database');
+
+//SETTINGS
 app.set('port', process.env.PORT || 3000);
 
-//middlewares
-app.use(bodyParser.json())
+//MIDLEWARES
+app.use(bodyParser.json());
 app.use(morgan(`dev`));
 const storage = multer.diskStorage({
     destination: path.join(__dirname, 'public/uploads'),
@@ -26,23 +53,26 @@ const storage = multer.diskStorage({
     }
 });
 app.use(express.json());
-//para la carga de imagenes
+
+//MULTER PARA LA CARGA DE IMAGENES
 app.use(multer({
     storage
 }).single('image'));
 
-//routes
-app.use('/api/categorias', require('./routes/categorias.route'));
+//Seteo routes
+app.use('/api/categorias', CategoriasRouter);
+app.use("/", swaggerUI.serve, swaggerUI.setup(specs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 //formulario desde el frontend , interpreta los datos como JSON
 app.use(express.urlencoded({
     extended: false
 }));
+
 //static files
 app.use(express.static(path.join(__dirname, 'public')));
-// console.log(path.join(__dirname, 'public'))
 
-//empezar el servidor
+//RUN LISTEN SERVER
 app.listen(app.get('port'), () => {
     console.log(`###################################`)
     console.log(`#########   PORT  ${app.get("port")}  ###########`);
