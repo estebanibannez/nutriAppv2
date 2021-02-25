@@ -2,7 +2,6 @@ const {
     Router
 } = require('express');
 const router = Router();
-const Categorias = require('../models/Categorias.model');
 const {
     getCategorias,
     postCategorias,
