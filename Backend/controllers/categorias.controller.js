@@ -1,3 +1,4 @@
+const { errorHandler } = require('../helpers/dberrorHandler');
 const Categorias = require('../models/Categorias.model');
 
 exports.getCategorias = async (req, res) => {
@@ -37,6 +38,23 @@ exports.postCategorias = async (req, res) => {
         });
 
         await newCategoria.save();
+
+        // await newCategoria.save((err, res)=> {
+        //     if(err){
+        //         console.log('ocurrio un error',err)
+        //         return res.status(400).json({
+        //             error: errorHandler(err)
+        //         })
+        //     }else{
+        //         return res.status(200).json({
+        //             'status': 200,
+        //             'message': 'Registro almacenado con éxito.',
+        //             'data': newCategoria
+        //         });
+
+        //     }
+           
+        // });
 
         return res.json({
             'status': 200,

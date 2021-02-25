@@ -6,7 +6,7 @@ const {
 const CategoriaSchema = new Schema({
     id: { type: String },
     nombre: { type: String, required: true },
-    descripcion: { type: String, required: true },
+    descripcion: { type: String},
     calorias: { type: String, required: true },
     hdc: { type: String, required: true },
     lipidos: { type: String, required: true },

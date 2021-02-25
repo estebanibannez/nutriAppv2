@@ -137,7 +137,7 @@ router.get('/', getCategorias);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CategoriaID'
+ *             $ref: '#/components/schemas/CategoriasID'
  *     responses:
  *       200:
  *         description: La categoria fue creado con éxito

@@ -3,7 +3,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 //EXPORTANDO ROUTES
-const CategoriasRouter = require('./routes/categorias.route')
+const CategoriasRouter = require('./routes/categorias.route');
+const PacientesRouter = require('./routes/pacientes.route');
 
 
 const swaggerUI = require("swagger-ui-express");
@@ -56,15 +57,23 @@ const storage = multer.diskStorage({
 app.use(express.json());
 
 //MULTER PARA LA CARGA DE IMAGENES
-app.use(multer({
-    storage
-}).single('image'));
+// app.use(multer({
+//     storage
+// }).single('image'));
 
 //Seteo routes
 app.use('/api/categorias', CategoriasRouter);
+app.use('/api/pacientes', PacientesRouter);
 app.use("/", swaggerUI.serve, swaggerUI.setup(specs));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
+
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+  });
+  
 //formulario desde el frontend , interpreta los datos como JSON
 app.use(express.urlencoded({
     extended: false
