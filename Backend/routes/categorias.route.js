@@ -2,7 +2,14 @@ const {
     Router
 } = require('express');
 const router = Router();
-const Categorias = require('../models/categorias.model')
+const Categorias = require('../models/Categorias.model');
+const {
+    getCategorias,
+    postCategorias,
+    getCategoriasbyId,
+    deleteCategoria,
+    putCategoria
+} = require('../controllers/categorias.controller');
 
 
 /**
@@ -116,15 +123,7 @@ const Categorias = require('../models/categorias.model')
 
 
 //GET
-router.get('/', async (req, res) => {
-    const query = await Categorias.find();
-
-    return res.json({
-        'status': 200,
-        'message': 'OK',
-        'data': query
-    })
-});
+router.get('/', getCategorias);
 
 
 /**
@@ -152,33 +151,7 @@ router.get('/', async (req, res) => {
 
 
 //POST
-router.post('/', async (req, res) => {
-    const {
-        nombre,
-        descripcion,
-        calorias,
-        hdc,
-        lipidos,
-        proteinas
-    } = req.body;
-
-    const newCategoria = new Categorias({
-        nombre,
-        descripcion,
-        calorias,
-        hdc,
-        lipidos,
-        proteinas
-    });
-
-    await newCategoria.save();
-
-    return res.json({
-        'status': 200,
-        'message': 'Registro almacenado con éxito.',
-        'data': newCategoria
-    });
-});
+router.post('/', postCategorias);
 
 /**
  * @swagger
@@ -207,33 +180,7 @@ router.post('/', async (req, res) => {
  */
 
 //GET BY ID
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-
-
-    if (id.match(/^[0-9a-fA-F]{24}$/)) {
-        // Yes, it's a valid ObjectId, proceed with `findById` call.
-
-        let query = await Categorias.findById(id);
-
-        if (query !== null)
-            return res.json({
-                'status': 200,
-                'message': 'OK',
-                'data': query
-            });
-        else
-            return res.json({
-                'status': 404,
-                'message': 'No éxisten datos.',
-            });
-    } else {
-        return res.json({
-            'status': 500,
-            'message': 'Indique un ID valido',
-        });
-    }
-});
+router.get('/:id', getCategoriasbyId);
 
 
 /**
@@ -257,30 +204,7 @@ router.get('/:id', async (req, res) => {
  *         description: No éxisten datos para eliminar.
  */
 
-router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
-    if (id.match(/^[0-9a-fA-F]{24}$/)) {
-
-        const query = await Categorias.findByIdAndDelete(req.params.id);
-
-        if (query !== null)
-            return res.json({
-                'status': 200,
-                'message': 'Registro eliminado con éxito.',
-                'data': query
-            });
-        else
-            return res.json({
-                'status': 404,
-                'message': 'No éxisten datos para eliminar.',
-            });
-    } else {
-        return res.json({
-            'status': 500,
-            'message': 'Indique un ID valido',
-        });
-    }
-});
+router.delete('/:id', deleteCategoria);
 
 
 /**
@@ -316,25 +240,6 @@ router.delete('/:id', async (req, res) => {
  */
 
 //PUT
-router.put('/:id', async (req, res) => {
-    const id = req.params.id;
-    const body = req.body;
-
-    await Categorias.findByIdAndUpdate(id, body, (err, docs) => {
-        if (err) {
-            return res.status(500).json({
-                'status': 200,
-                'message': `Ocurrió un error ${err}.`,
-            });
-        } else {
-            return res.json({
-                'status': 200,
-                'message': 'Registro actualizado con éxito.'
-                // 'data': docs
-            });
-        }
-    });
-
-});
+router.put('/:id', putCategoria);
 
 module.exports = router;
