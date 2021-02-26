@@ -32,7 +32,7 @@ const options = {
 			},
 		],
 	},
-	apis: ["./routes/*.js"],
+	apis: ["./src/routes/*.js"],
 };
 
 const specs = swaggerJsDoc(options);
@@ -62,6 +62,7 @@ app.use(express.json());
 // }).single('image'));
 
 //Seteo routes
+
 app.use('/api/categorias', CategoriasRouter);
 app.use('/api/pacientes', PacientesRouter);
 app.use("/", swaggerUI.serve, swaggerUI.setup(specs));
