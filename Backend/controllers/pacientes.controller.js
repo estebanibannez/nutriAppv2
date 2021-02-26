@@ -1,4 +1,4 @@
-const Pacientes = require('../Backend/models/Pacientes.model');
+const Pacientes = require('../models/Pacientes.model');
 const _ = require('lodash');
 const fs = require('fs');
 const formidable = require('formidable');
