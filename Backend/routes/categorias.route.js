@@ -9,7 +9,7 @@ const {
     getCategoriasbyId,
     deleteCategoria,
     putCategoria
-} = require('../../Backend/controllers/categorias.controller');
+} = require('../Backend/controllers/categorias.controller');
 
 
 /**
