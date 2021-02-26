@@ -7,7 +7,7 @@ const {
     getPhoto,
     pacientesbyId,
     read
-} = require('../controllers/pacientes.controller')
+} = require('../../Backend/controllers/pacientes.controller')
 
 router.get('/', getPacientes);
 router.get('/foto/:pacientesId', getPhoto);

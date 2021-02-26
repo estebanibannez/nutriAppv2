@@ -2,13 +2,14 @@ const {
     Router
 } = require('express');
 const router = Router();
+const path = require('path');
 const {
     getCategorias,
     postCategorias,
     getCategoriasbyId,
     deleteCategoria,
     putCategoria
-} = require('../controllers/categorias.controller');
+} = require('../../Backend/controllers/categorias.controller');
 
 
 /**
