@@ -7,6 +7,7 @@ const CategoriasRouter = require('./routes/categorias.route');
 const PacientesRouter = require('./routes/pacientes.route');
 
 
+const cors = require('cors');
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const express = require('express');
@@ -45,6 +46,7 @@ require('./database');
 app.set('port', process.env.PORT || 3000);
 
 //MIDLEWARES
+app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan(`dev`));
 const storage = multer.diskStorage({
@@ -54,6 +56,7 @@ const storage = multer.diskStorage({
 
     }
 });
+
 app.use(express.json());
 
 //MULTER PARA LA CARGA DE IMAGENES
