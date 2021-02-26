@@ -3,8 +3,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 //EXPORTANDO ROUTES
-const CategoriasRouter = require('./Backend/routes/categorias.route');
-const PacientesRouter = require('./Backend/routes/pacientes.route');
+const CategoriasRouter = require('./routes/categorias.route');
+const PacientesRouter = require('./routes/pacientes.route');
 
 
 const swaggerUI = require("swagger-ui-express");
