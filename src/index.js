@@ -43,7 +43,7 @@ const app = express();
 require('./database');
 
 //SETTINGS
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 
 //MIDLEWARES
 app.use(cors());
