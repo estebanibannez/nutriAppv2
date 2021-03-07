@@ -29,7 +29,7 @@ const options = {
 		servers: [
 			{
 				// url: "http://localhost:3000",
-				url: process.env.PATHSWAGGER || "http://localhost:3000",
+				url: process.env.PATHSWAGGER || "http://localhost:8080",
 			},
 		],
 	},
