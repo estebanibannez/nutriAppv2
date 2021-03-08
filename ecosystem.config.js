@@ -5,9 +5,6 @@ module.exports = {
     watch: '.',
     env: {
       "NODE_ENV": "development",
-      "PATHSWAGGER": "http://localhost:3000",
-      "MONGODB_URI": "mongodb+srv://admin:admin12345@nutriappcluster.4e7o2.mongodb.net/nutriapp",
-      
     }
   }, {
     script: './service-worker/',

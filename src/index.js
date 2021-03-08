@@ -68,7 +68,7 @@ app.use(express.json());
 
 app.use('/api/categorias', CategoriasRouter);
 app.use('/api/pacientes', PacientesRouter);
-app.use("/", swaggerUI.serve, swaggerUI.setup(specs));
+// app.use("/", swaggerUI.serve, swaggerUI.setup(specs));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 
