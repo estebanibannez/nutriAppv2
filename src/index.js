@@ -90,7 +90,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
     console.log(`###################################`)
     console.log(`#########   PORT  ${app.get("port")}  ###########`);
-    console.log(`#########   API REST    ###########`)
+    console.log(`#########   API REST TEST !    ###########`)
     console.log(`#########   AMBIENTE    ###########`);
     console.log(`#########   ${process.env.NODE_ENV} ###########`);
     console.log(`###################################`)
